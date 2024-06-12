@@ -38,12 +38,14 @@ if __name__ == "__main__":
     print(height)
     print(width)
 
-
     # Aplicando mascara
     f_size = 15
 
-    folha_image_fourier[:575, 959:961] = 1
-    folha_image_fourier[-575:,959:961] = 1 
+    folha_image_fourier[:570, 953:967] = 1
+    folha_image_fourier[-570:,953:967] = 1 
+
+    folha_image_fourier[593:607, :890] = 1
+    folha_image_fourier[593:607:,-890:] = 1 
 
     plt.imshow(np.log(abs(folha_image_fourier)), cmap='gray')
     plt.savefig("results/folha_mask_fourier.png")

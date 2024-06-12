@@ -1,21 +1,34 @@
-import cv2 
+import cv2
+import os
 
-PATH = "video.mp4"
+video_path = 'video.mp4'
+output_dir = 'frames'
 
-def frameCapture(path):
-    video = cv2.VideoCapture(path)
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
 
-    count = 0
-    sucess = 1
+cap = cv2.VideoCapture(video_path)
 
-    while sucess:
-        sucess, image = video.read()
+if not cap.isOpened():
+    print("Erro ao abrir o vídeo.")
+    exit()
 
-        image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+frame_count = 0
 
-        cv2.imwrite("frame/frame%d.jpg" % count, image_gray)
-        count += 1
+while True:
+    ret, frame = cap.read()
 
+    if not ret:
+        break
 
-if __name__ == '__main__':
-    frameCapture(PATH)
+    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    frame_filename = os.path.join(output_dir, f'frame_{frame_count:04d}.png')
+
+    cv2.imwrite(frame_filename, gray_frame)
+
+    frame_count += 1
+
+cap.release()
+
+print(f'Extração de frames em tons de cinza concluída. {frame_count} frames salvos em {output_dir}.')
