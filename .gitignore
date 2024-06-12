@@ -1,4 +1,4 @@
 .venv
-frames
-teste
-results
+rastreio/frames/
+rastreio/teste/
+rastreio/results/

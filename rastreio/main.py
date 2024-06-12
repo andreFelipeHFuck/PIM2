@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 PATH_FRAMES_DIR = "frames"
 PATH_RESULTS_DIR = "results"
-PATH_TEMPLATE = "template.png"
+PATH_TEMPLATE = "template2.png"
 PATH_FIRST_FRAME = f'{PATH_FRAMES_DIR}/frame_0000.png'
 
 first_frame = cv2.imread(PATH_FIRST_FRAME, 0)
@@ -104,16 +104,17 @@ def tracking(meth:str)->None:
         cv2.rectangle(marked_frame, top_left, bottom_right, (0, 0, 255), 2)
         marked_frames.append(marked_frame)
 
-        cv2.imwrite(f'teste/{frame_filename}', marked_frame)
+        # cv2.imwrite(f'teste/{frame_filename}', marked_frame)
 
-
-    # out = cv2.VideoWriter(f'results/{meth[4:]}.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30.0, (video_w, video_h))
-    # for marked_frame in marked_frames:
-    #     out.write(marked_frame)
-    # out.release()
+    out = cv2.VideoWriter(f'results/{meth[4:]}.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30.0, (video_w, video_h))
+    for marked_frame in marked_frames:
+        out.write(marked_frame)
+    out.release()
 
 def main()->None:
-   tracking(methods[2])
+#   analysis_methods()
+#   graphics_methods()
+  tracking(methods[0])
 
 if __name__ == '__main__':
     main()
