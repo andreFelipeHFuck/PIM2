@@ -1,4 +1,9 @@
 .venv
+
+rastreio/frames-gato/
+rastreio/teste-gato/
+rastreio/results-gato/
+
 rastreio/frames/
 rastreio/teste/
 rastreio/results/

@@ -1,8 +1,8 @@
 import cv2
 import os
 
-video_path = 'video.mp4'
-output_dir = 'frames'
+video_path = 'video2.mp4'
+output_dir = 'frames-gato'
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)

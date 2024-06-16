@@ -3,8 +3,8 @@ import csv
 import os
 import matplotlib.pyplot as plt
 
-PATH_FRAMES_DIR = "frames"
-PATH_RESULTS_DIR = "results"
+PATH_FRAMES_DIR = "frames-gato"
+PATH_RESULTS_DIR = "results-gato"
 PATH_TEMPLATE = "template2.png"
 PATH_FIRST_FRAME = f'{PATH_FRAMES_DIR}/frame_0000.png'
 
@@ -59,7 +59,7 @@ def graphic_method(meth:str)->None:
     min_vals = []
     max_vals = []
 
-    with open(os.path.join('results', f'TM_CCOEFF_NORMED.csv'), newline='') as csvfile:
+    with open(os.path.join('results-gato', f'{meth[4:]}.csv'), newline='') as csvfile:
         csvreader = csv.reader(csvfile)
         next(csvreader)
         for row in csvreader:
@@ -77,7 +77,7 @@ def graphic_method(meth:str)->None:
     plt.ylabel('Valor')
     plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
     plt.grid(False)
-    plt.savefig(f'results/{meth[4:]}.png')
+    plt.savefig(f'results-gato/{meth[4:]}_gato.png')
 
 def graphics_methods()->None:
     for meth in methods:
@@ -104,17 +104,17 @@ def tracking(meth:str)->None:
         cv2.rectangle(marked_frame, top_left, bottom_right, (0, 0, 255), 2)
         marked_frames.append(marked_frame)
 
-        # cv2.imwrite(f'teste/{frame_filename}', marked_frame)
+        cv2.imwrite(f'teste-gato/{frame_filename}', marked_frame)
 
-    out = cv2.VideoWriter(f'results/{meth[4:]}.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30.0, (video_w, video_h))
-    for marked_frame in marked_frames:
-        out.write(marked_frame)
-    out.release()
+    # out = cv2.VideoWriter(f'results/{meth[4:]}_gato.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30.0, (video_w, video_h))
+    # for marked_frame in marked_frames:
+    #     out.write(marked_frame)
+    # out.release()
 
 def main()->None:
-#   analysis_methods()
-#   graphics_methods()
-  tracking(methods[0])
+#    analysis_methods()
+#    graphics_methods()
+  tracking(methods[1])
 
 if __name__ == '__main__':
     main()
